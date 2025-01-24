@@ -14,21 +14,17 @@ class APIServices {
                 completion(nil, NSError(domain: "APIServices", code: 1000, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"]))
                 return
             }
-
             URLSession.shared.dataTask(with: url) { (data, _, error) in
-                // Handle network error
                 if let error = error {
                     completion(nil, error)
                     return
                 }
                 
-                // Check if data is received
                 guard let data = data else {
                     completion(nil, NSError(domain: "APIServices", code: 1001, userInfo: [NSLocalizedDescriptionKey: "No data received"]))
                     return
                 }
                 
-                // Start decoding the data
                 let decoder = JSONDecoder()
                  decoder.keyDecodingStrategy = .convertFromSnakeCase 
                 
